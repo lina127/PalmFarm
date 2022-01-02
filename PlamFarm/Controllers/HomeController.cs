@@ -22,8 +22,8 @@ namespace PlamFarm.Controllers
                 return RedirectToAction("Login", "Farms");
             }
             int farmId = HttpContext.Session.GetInt32("farmId").Value;
-            List<Cow> cows = _context.Cow.Where(o => o.FarmId == farmId).ToList();
-            List<Pregnancy> pregnancies = _context.Pregnancy.Where(o => o.PregnancyStatus == "T" && o.Cow.FarmId == farmId).OrderBy(o => o.PregnantDate).Include(o => o.Cow).ToList();
+            List<Cow> cows = _context.Cow.Where(o => o.FarmId == farmId && o.Status.ToLower() != "dead" && o.Status.ToLower() != "sold").ToList();
+            List<Pregnancy> pregnancies = _context.Pregnancy.Where(o => o.PregnancyStatus == "T" && o.Cow.FarmId == farmId && o.Cow.Status.ToLower() != "dead" && o.Cow.Status.ToLower() != "sold").OrderBy(o => o.PregnantDate).Include(o => o.Cow).ToList();
             CowDTO cowDTO = new CowDTO(null, cows, pregnancies);
             return View(cowDTO);
         }
