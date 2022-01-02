@@ -12,7 +12,6 @@
 * View current cows, sold cows and dead cows by filtering the data table.
 * Flexible data handling. Easy create, edit and delete.
 ## UI
-#### User interface shown below: </br>
 <p style="float-left">
 <img src="https://user-images.githubusercontent.com/89232984/147863359-13ee01fd-7216-4c77-b5f1-e51c16a61b0e.png" width="30%" height="30%" />
 <img src="https://user-images.githubusercontent.com/89232984/147863394-4eb6a9ae-f68e-4bcf-ba19-c1e122efd73a.png" width="30%" height="30%" />      
