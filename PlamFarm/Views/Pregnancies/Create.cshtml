@@ -1,0 +1,39 @@
+﻿@model PlamFarm.Models.Pregnancy
+
+@{
+    ViewData["Title"] = "Create";
+    var cowId = ViewData["cowId"];
+}
+
+<h1>Create</h1>
+
+<h4>Pregnancy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="CowId" class ="form-control" value="@cowId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PregnantDate" class="control-label">PregnantDate <span style="color:red">*</span></label>
+                <input asp-for="PregnantDate" class="form-control" type="date" required />
+                <span asp-validation-for="PregnantDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kpn" class="control-label">KPN <span style="color:red">*</span></label>
+                <input asp-for="Kpn" class="form-control" required/>
+                <span asp-validation-for="Kpn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

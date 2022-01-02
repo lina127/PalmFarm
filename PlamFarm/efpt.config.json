@@ -1,0 +1,50 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "TrackfarmContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "PlamFarm",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Cow]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Farm]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pregnancy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sold]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "laptop-bgc8u41v\\sqlexpress.TrackFarm.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

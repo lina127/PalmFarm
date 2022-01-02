@@ -1,0 +1,108 @@
+﻿@using PlamFarm.Helper
+@model PlamFarm.Models.Pregnancy
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="row">
+    <div class="col-6"> 
+         <h1> <a  asp-action="Index" class="me-2"><i class="fas fa-arrow-left" style="font-size:28px;"></i></a>Details</h1>
+    </div>
+    <div class="col-6"> 
+        <a href="#!" class="giveBirthBtn btn-primary btn float-end" id="@Model?.Id" data-bs-toggle="modal" data-bs-target="#dateModal" style="background-color:#FF73DE; border-color:#FF73DE;">Give Birth</a>
+    </div>
+</div>
+
+<div>
+    <h4>Pregnancy</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Pregnant Cow
+            @if(Model.Cow.NickName != null)
+            {
+                <span>(aka @Html.DisplayFor(model => model.Cow.NickName))</span>
+            }
+            
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cow.UId)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PregnantDate)
+        </dt>
+        <dd class = "col-sm-10">
+             @FormattedDate.ToFormattedDateTime(Model.PregnantDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kpn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kpn)
+        </dd>
+
+        @*@if (@Model.BirthDate.HasValue && @Model.PregnancyStatus == "F")
+        {
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Model.BirthDate.Value.ToString("yyyy-MM-dd")
+        </dd>
+        }*@
+    </dl>
+</div>
+<div>
+
+    <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger ms-5"><i class="far fa-trash-alt"></i></a>
+    
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-secondary me-5 float-end">Edit</a> 
+</div>
+
+<div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="dateModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">When did it born?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <lable for="birthDate" class="form-label">Birth Date</lable>
+            <input type="date" class="form-control" id="modalBirth"/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="setBirthBtn">Save</button>
+      </div>
+    </div>
+  </div>
+    </div>
+
+<script type="text/javascript">
+    $("document").ready(function(){
+        var lastClickedId = 0;
+        $(".giveBirthBtn").click(function(e){
+            lastClickedId = $(this)[0].id;
+        });
+
+        $("#setBirthBtn").click(function(e){
+            e.preventDefault();
+            let birthDate = $("#modalBirth").val();
+            let data = { Id: lastClickedId, BirthDate: birthDate};
+                $.ajax({
+                    url: "/pregnancies/AddBirthdate",
+                    data: data,
+                    type: "post",
+                    datatype: "text",
+                    success: function(result){
+                        location.href = "/cows/create";
+                    }
+                })
+              
+
+        });
+    });
+</script>

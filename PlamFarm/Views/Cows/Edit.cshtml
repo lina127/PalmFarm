@@ -1,0 +1,89 @@
+﻿@model PlamFarm.Models.Cow
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+    <h1> <a href="@Url.ActionLink("Details", "Cows", new {id=Model.CowId})" class="me-2"><i class="fas fa-arrow-left" style="font-size:28px;"></i></a>Edit</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CowId" />
+            <div class="form-group">
+                <label asp-for="UId" class="control-label"></label>
+                <input asp-for="UId" class="form-control" />
+                <span asp-validation-for="UId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="NickName" class="control-label"></label>
+                <input asp-for="NickName" class="form-control" />
+                <span asp-validation-for="NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="BirthDate" class="control-label">Birth Date <span style="color:red">*</span></label>
+                <input asp-for="BirthDate" class="form-control" type="date" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Sex" class="control-label">Sex <span style="color:red">*</span></label>
+                <select class="custom-select form-control" asp-for="Sex">
+                    <option value="M" selected>M</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Kpn" class="control-label">KPN</label>
+                <input asp-for="Kpn" class="form-control" />
+                <span asp-validation-for="Kpn" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <label asp-for="MomUid" class="control-label"></label>
+                <input asp-for="MomUid" class="form-control" />
+                <span asp-validation-for="MomUid" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Epd" class="control-label">EPD</label>
+                <input asp-for="Epd" class="form-control" placeholder="AAAA" />
+                <span asp-validation-for="Epd" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Comment" class="control-label"></label>
+                <textarea asp-for="Comment" class="form-control" rows=4></textarea>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <label asp-for="Type" class="control-label"></label>
+                <select class="custom-select form-control" asp-for="Type">
+                    <option value="korean" selected>Korean</option>
+                    <option value="holstein">Holstein</option>
+                    <option value="dairy">Dairy</option>
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Status" class="control-label"></label>
+
+                <select class="custom-select form-control" asp-for="Status">
+                    <option value="breed" selected>Breed</option>
+                    <option value="--">--</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="FarmId" class="control-label"></label>
+                <select asp-for="FarmId" class="form-control" asp-items="ViewBag.FarmId"></select>
+                <span asp-validation-for="FarmId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary mt-3 form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+
