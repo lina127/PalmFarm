@@ -12,8 +12,6 @@
 * Know the timing of pregnancy, predictable birth date for pregnant cows at a glance.
 * View current cows, sold cows and dead cows by filtering the data table.
 * Flexible data handling. Easy create, edit and delete.
-
-
 ## UI
 #### User interface shown below: </br>
 <p style="float-left">
