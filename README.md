@@ -1,7 +1,7 @@
 # PlamFarm
-**Used Languages**: C#, cshtml, css, javaScript, MSSQL
-**Used Frameworks**: .NET 6 MVC, jQuery
-**Used Libraries**: DataTables, FontAwsome, Bootstrap, SweetAlert2
+**Used Languages**: C#, cshtml, css, javaScript, MSSQL </br>
+**Used Frameworks**: .NET 6 MVC, jQuery </br>
+**Used Libraries**: DataTables, FontAwsome, Bootstrap, SweetAlert2 </br>
 
 #### Control and explore your farm livestock in your palm.
 <br/>Function:
