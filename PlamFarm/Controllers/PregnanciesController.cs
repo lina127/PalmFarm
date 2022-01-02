@@ -23,7 +23,8 @@ namespace PlamFarm.Controllers
         // GET: Pregnancies
         public IActionResult Index()
         {
-            List<Pregnancy> pregnancies = _context.Pregnancy.Where(o => o.PregnancyStatus == "T" && o.Cow.Status != "dead" && o.Cow.Status !="sold").OrderBy(o => o.PregnantDate).Include(o => o.Cow).ToList();
+            int farmId = HttpContext.Session.GetInt32("farmId").Value;
+            List<Pregnancy> pregnancies = _context.Pregnancy.Where(o => o.Cow.FarmId == farmId && o.PregnancyStatus == "T" && o.Cow.Status != "dead" && o.Cow.Status !="sold").OrderBy(o => o.PregnantDate).Include(o => o.Cow).ToList();
             return View(pregnancies);
         }
 
