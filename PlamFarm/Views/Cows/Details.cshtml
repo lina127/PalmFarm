@@ -1,0 +1,271 @@
+﻿@using PlamFarm.Helper
+@model PlamFarm.Models.CowDTO
+@{
+    var pragnent = Model.Cow.Pregnancy.Where(o => o.CowId == Model.Cow.CowId && o.PregnancyStatus == "T").FirstOrDefault();
+    string pragnentDate = "";
+    int kpn = 0;
+    int id = 0;
+    if (pragnent != null)
+    {
+        pragnentDate = FormattedDate.ToFormattedDateTime(pragnent.PregnantDate);
+        kpn = pragnent.Kpn;
+        id = pragnent.Id;
+
+    }
+
+}
+<div class="sticky">
+
+    <a href="!#" class="btn btn-success icon" data-bs-toggle="modal" data-bs-target="#soldModal"><i class="fas fa-won-sign"></i></a> <br />
+    <a href="!#" class="btn btn-success mt-3 icon" id="deadBtn" style="background-color:#B789FF"><i class="fas fa-skull-crossbones"></i></a> <br />
+    <a asp-action="Delete" asp-route-id="@Model?.Cow.CowId" class="btn btn-danger mt-3 icon"><i class="far fa-trash-alt"></i></a>
+
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <h1> <a href="/Cows/Index" class="me-2"><i class="fas fa-arrow-left" style="font-size:28px;"></i></a>Details</h1>
+    </div>
+    <div class="col-6">
+        @if (Model.Cow.Sex.ToLower() == "f" && Model.Cow.Pregnancy.Where(o => o.PregnancyStatus == "T").ToList().Count == 0)
+        {
+            <a href="@Url.ActionLink("Create", "Pregnancies", new {id = Model.Cow.CowId})" class="btn btn-primary float-end" style="background-color:#FF73DE; border-color:#FF73DE; font-size:20px"><i class="fas fa-baby-carriage"></i></a>
+        }
+        else
+        {
+
+        }
+    </div>
+
+</div>
+
+<div>
+    <hr />
+    <dl class="row" style="font-size:16px">
+        <dt class="col-sm-2">
+            Unique ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.UId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.NickName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.NickName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.BirthDate)
+        </dt>
+        <dd class="col-sm-10">
+            @FormattedDate.ToFormattedDateTime(Model.Cow.BirthDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.Sex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Sex)
+        </dd>
+
+        <dt class="col-sm-2">
+            KPN
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Kpn)
+        </dd>
+        <dt class="col-sm-2">
+            Mom's Unique ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.MomUid)
+        </dd>
+        <dt class="col-sm-2">
+            EPD
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Epd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Comment)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cow.Farm)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cow.Farm.Name)
+        </dd>
+        @if (Model.Pregnancies.Count > 0)
+        {
+            <h2 class="text-center">Pragnent</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pragnent Date</th>
+                        <th>KPN</th>
+                        <th>Birth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pr in Model.Pregnancies)
+                    {
+                        <tr>
+                            <td>@FormattedDate.ToFormattedDateTime(pr.PregnantDate)</td>
+                            <td>@pr.Kpn</td>
+                            @if (@pr.PregnancyStatus == "F")
+                            {
+                                <td>@FormattedDate.ToFormattedDateTime(pr.BirthDate.Value)</td>
+                            }
+                            else
+                            {
+                                <td><a data-bs-toggle="modal" data-bs-target="#dateModal" class="btn-primary btn" style="background-color:#FF73DE; border-color:#FF73DE;">Give Birth</a></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    </dl>
+    <div class="text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Cow.CowId" class="btn btn-primary form-control ">Edit</a>
+    </div>
+</div>
+<!-- Give Birth Modal -->
+<div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="dateModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">When did it born?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <lable for="birthDate" class="form-label">Birth Date</lable>
+                    <input type="date" class="form-control" id="modalBirth" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="setBirthBtn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sold Modal -->
+<div class="modal fade" id="soldModal" tabindex="-1" aria-labelledby="dateModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sold Info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <lable for="modalPrice" class="form-label">Price </lable>
+                        <input placeholder="200" type="number" class="form-control" id="modalPrice" />
+                    </div>
+                    <div class="form-group">
+                        <lable for="modalGrade" class="form-label">Grade</lable>
+                        <input type="text" placeholder="1+" class="form-control" id="modalGrade" />
+                    </div>
+                    <div class="form-group">
+                        <lable for="modalComment" class="form-label">Comment</lable>
+                        <textarea class="form-control" id="modalComment" rows=2></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="soldBtn">Sold</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $("document").ready(function(){
+        $("#setBirthBtn").click(function(e){
+            e.preventDefault();
+            //let id = $(this)[0].id;
+            let birthDate = $("#modalBirth").val();
+            var data = {id : "@id", birthdate:birthDate}
+                $.ajax({
+                    url: "/pregnancies/addbirthdate",
+                    data: data,
+                    type: "post",
+                    datatype: "text",
+                    success: function(result){
+                        location.href = "/cows/create";
+                    }
+                })
+        });
+
+        $("#deadBtn").click(function(e){
+            e.preventDefault();
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes'
+            }).then((result) => {
+              if (result.isConfirmed){
+                  var data = {id: @Model?.Cow.CowId}
+                  $.ajax({
+                    url: "/cows/DeadCow",
+                    data: data,
+                    type: "post",
+                    datatype: "text",
+                    success: function(result){
+                        Swal.fire(
+                  'Deleted!'
+                )
+                        location.href = "/cows/Index";
+                    }
+                })
+
+              }
+            })
+        })
+
+        $("#soldBtn").click(function(e){
+            e.preventDefault();
+            console.log("ddd0");
+            let price = $("#modalPrice").val();
+            let grade = $("#modalGrade").val();
+            let comment = $("#modalComment").val();
+            var data = {id : @Model.Cow.CowId, price:price, grade:grade, comment:comment}
+            $.ajax({
+                    url: "/cows/SoldCow",
+                    data: data,
+                    type: "post",
+                    datatype: "text",
+                    success: function(result){
+                        location.href = "/cows/Index";
+                    }
+                })
+        })
+    });
+</script>

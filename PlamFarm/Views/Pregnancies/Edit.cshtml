@@ -1,0 +1,40 @@
+﻿@model PlamFarm.Models.Pregnancy
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+    <h1> <a href="@Url.ActionLink("Details", "Pregnancies", new {id=Model.Id})" class="me-2"><i class="fas fa-arrow-left" style="font-size:28px;"></i></a>Edit</h1>
+</div>
+
+<h4>Pregnancy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PregnancyStatus" />
+            <input type="hidden" asp-for="CowId"/>
+
+            <div class="form-group">
+                <label asp-for="PregnantDate" class="control-label"></label>
+                <input asp-for="PregnantDate" class="form-control" type="date" required/>
+                <span asp-validation-for="PregnantDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kpn" class="control-label"></label>
+                <input asp-for="Kpn" class="form-control" required/>
+                <span asp-validation-for="Kpn" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary mt-3 " />
+            </div>
+        </form>
+    </div>
+</div>
+
+

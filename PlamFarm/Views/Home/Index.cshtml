@@ -1,0 +1,132 @@
+﻿@using PlamFarm.Helper
+@model PlamFarm.Models.CowDTO
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 id="farmName"></h1>
+
+<div class="text-center">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" colspan=3>Current Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong><i class="fas fa-venus" style="color:pink"></i></strong></td>
+                <td><strong><i class="fas fa-mars" style="color:blue"></i></strong></td>
+            </tr>
+            <tr>
+                <td>@Model.Cows.Where(o => o.Status.ToLower() != "dead" && o.Status.ToLower() != "sold").Count()</td>
+                <td>@Model.Cows.Where(o => o.Sex == "F" && o.Status.ToLower() != "dead" && o.Status.ToLower() != "sold").Count()</td>
+                <td>@Model.Cows.Where(o => o.Sex == "M" && o.Status.ToLower() != "dead" && o.Status.ToLower() != "sold").Count()</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-6">
+            <a href="/Cows/Index" class="btn-primary btn">View Cows</a>
+        </div>
+        <div class="col-6">
+            <a href="/Cows/Create" class="btn-primary btn" id="newCow">Add new cows</a>
+        </div>
+    </div>
+
+
+    <div id="pCurrent" " class="mt-4">
+        <h3 class="mt-2">Currently Pregnant</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Cow</th>
+                    <th scope="col">Pregnant Date</th>
+                    <th scope="col">KPN</th>
+                    <th scope="col">Predict</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pr in Model.Pregnancies)
+                {
+                <tr>
+                    <th>
+                        <!-- 1 week left-->
+                        @if((@pr.PregnantDate.AddDays(285.0) - DateTime.Now).Days <= 7 )
+                        {
+                        <i class="fas fa-baby" style="color:red"></i>
+                        } // 2 weeks left
+                        else if((@pr.PregnantDate.AddDays(285.0) - DateTime.Now).Days <= 14)
+                        {
+                        <i class="fas fa-baby" style="color:#FFB706"></i>
+                        }
+                        <!-- past predict date-->
+                        @if((@pr.PregnantDate.AddDays(285.0) - DateTime.Now).Days <= 0)
+                        {
+                        <i class="fas fa-baby" style="color:red"></i>
+                        }
+                    </th>
+                    <td class="text-start">@pr.Cow.UId.ToString().Substring(@pr.Cow.UId.ToString().Length - 3)
+                        @if(pr.Cow.NickName != null)
+            {
+                <span style="color:#FF73DE"> @pr.Cow.NickName</span>
+            }
+                    </td>
+                    <td>@pr.PregnantDate.ToString("yy-MM-dd")</td>
+                    <td>@pr.Kpn</td>
+                    <td>@pr.PregnantDate.AddDays(285.0).ToString("yy-MM-dd")</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <span><i class="fas fa-baby" style="color:red"></i> in 1week</span> |
+        <span><i class="fas fa-baby" style="color:#FFB706"></i> in 2weeks</span>
+    </div>
+    <div id="pTiming" class="mt-4">
+        <h3 class="mt-2">Pregnant Timing</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Cow</th>
+                    <th scope="col">Bday</th>
+                    <th scope="col">Predict</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pr in Model.Cows.Where(o => o.Sex == "F" && (DateTime.Now - o.BirthDate.AddMonths(13)).Days < 30))
+                {
+                <tr>
+                    <th>
+                        <!-- 1 week left-->
+                        @if((@pr.BirthDate.AddMonths(13) - DateTime.Now).Days <= 0 )
+                        {
+                        <i class="fas fa-thumbs-up" style="color:green"></i>
+                        } // d-day
+                        else if((@pr.BirthDate.AddMonths(13) - DateTime.Now).Days <= 7)
+                        {
+                        <i class="fas fa-thumbs-up" style="color:#FFB706"></i>
+                        }
+
+                    </th>
+                    <td>@pr.UId.ToString().Substring(@pr.UId.ToString().Length - 3)
+                    </td>
+                    <td>@pr.BirthDate.ToString("yy-MM-dd")</td>
+                    <td>@pr.BirthDate.AddMonths(13).ToString("yy-MM-dd")</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <span><i class="fas fa-thumbs-up" style="color:green"></i> Good</span> |
+        <span><i class="fas fa-thumbs-up" style="color:#FFB706"></i> Almost</span>
+    </div>
+
+
+</div>
+
+
+
+</div>

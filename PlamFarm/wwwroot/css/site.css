@@ -1,0 +1,40 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+th, td {
+    padding: 3px 8px !important;
+}
+table{
+    font-size: 16px !important;
+}
+
+div.sticky {
+    position: fixed ;
+    top: 200px;
+    right: 0;
+}
+.icon {
+    font-size: 20px;
+    width:50px;
+}
+
+#pTiming, #pCurrent{
+    border: 1px solid gray;
+    border-radius: 20px;
+}
