@@ -71,7 +71,7 @@ namespace PlamFarm.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FarmId"] = new SelectList(_context.Farm, "FarmId", "Name", cow.FarmId);
-            return View(cow);
+            return View(cow); 
         }
 
         // GET: Cows/Edit/5
