@@ -1,4 +1,4 @@
-# PlamFarm
+# PalmFarm
 ## About
 **Used Languages**: C#, cshtml, css, javaScript, MSSQL </br>
 **Used Frameworks**: .NET 6 MVC, jQuery </br>
