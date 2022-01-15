@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PlamFarm.Data;
-using PlamFarm.Models;
+using PalmFarm.Data;
+using PalmFarm.Models;
 
-namespace PlamFarm.Controllers
+namespace PalmFarm.Controllers
 {
     public class PregnanciesController : Controller
     {

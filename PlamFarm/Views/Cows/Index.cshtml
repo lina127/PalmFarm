@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PlamFarm.Models.Cow>
+﻿@model IEnumerable<PalmFarm.Models.Cow>
 <div class="row">
     <div class="col-6">
         <div>
@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-6">
-        <h4>Current Cows</h4>
+        <h4 id="headName">Current Cows</h4>
     </div>
     <div class="col-6">
         <select class="form-select" aria-labelledby="cowFilter" id="cowFilter">
@@ -76,7 +76,7 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sold.FirstOrDefault().Price)₩
+                    $@Html.DisplayFor(modelItem => item.Sold.FirstOrDefault().Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sold.FirstOrDefault().Grade)
@@ -94,6 +94,7 @@
     $(document).ready( function () {
           var cowTable = $('#cowTable').DataTable({
               "lengthChange":false,
+              "autoWidth": false,
               "info": false,
               "order": [[ 2, "desc" ]],
               "columnDefs": [
@@ -114,13 +115,16 @@
           $("#cowFilter").on("change", function(){
               switch(this.value){
                   case "breed":
+                    $("#headName").html("Current Cows");
                      cowTable.column(6).visible(false);
                      cowTable.column(2).visible(true);
                      cowTable.column(7).visible(false);
                      cowTable.column(8).visible(true);
-                    cowTable.column(5).search("breed").draw();
+                     cowTable.column(5).search("breed").draw();
+                    
                     break;
                   case "dead" :
+                  $("#headName").html("Dead Cows");
                     cowTable.column(6).visible(false);
                     cowTable.column(2).visible(true);
                     cowTable.column(7).visible(false);
@@ -128,6 +132,7 @@
                     cowTable.column(5).search("dead").draw();
                     break;
                   case "sold" :
+                  $("#headName").html("Sold Cows");
                     cowTable.column(6).visible(true);
                     cowTable.column(2).visible(false);
                     cowTable.column(7).visible(true);

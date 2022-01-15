@@ -1,4 +1,4 @@
-﻿namespace PlamFarm.Models
+﻿namespace PalmFarm.Models
 {
     public class CowDTO
     {

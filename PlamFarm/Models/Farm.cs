@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PlamFarm.Models
+namespace PalmFarm.Models
 {
     public partial class Farm
     {

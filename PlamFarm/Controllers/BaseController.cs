@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PlamFarm.Controllers
+namespace PalmFarm.Controllers
 {
     public class BaseController : Controller
     {

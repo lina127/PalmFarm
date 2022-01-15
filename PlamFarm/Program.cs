@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PlamFarm.Data;
+using PalmFarm.Data;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

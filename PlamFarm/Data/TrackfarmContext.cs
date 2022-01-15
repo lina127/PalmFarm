@@ -3,11 +3,11 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using PlamFarm.Models;
+using PalmFarm.Models;
 
 #nullable disable
 
-namespace PlamFarm.Data
+namespace PalmFarm.Data
 {
     public partial class TrackfarmContext : DbContext
     {

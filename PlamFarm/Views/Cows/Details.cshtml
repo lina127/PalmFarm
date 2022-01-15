@@ -1,5 +1,5 @@
-﻿@using PlamFarm.Helper
-@model PlamFarm.Models.CowDTO
+﻿@using PalmFarm.Helper
+@model PalmFarm.Models.CowDTO
 @{
     var pragnent = Model.Cow.Pregnancy.Where(o => o.CowId == Model.Cow.CowId && o.PregnancyStatus == "T").FirstOrDefault();
     string pragnentDate = "";

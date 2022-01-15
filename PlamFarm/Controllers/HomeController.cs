@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PlamFarm.Data;
-using PlamFarm.Models;
+using PalmFarm.Data;
+using PalmFarm.Models;
 using System.Diagnostics;
 
-namespace PlamFarm.Controllers
+namespace PalmFarm.Controllers
 {
     public class HomeController : BaseController
     {

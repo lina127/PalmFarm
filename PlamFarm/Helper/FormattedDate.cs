@@ -1,4 +1,4 @@
-﻿namespace PlamFarm.Helper
+﻿namespace PalmFarm.Helper
 {
     public static class FormattedDate
     {
