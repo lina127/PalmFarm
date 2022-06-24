@@ -4,7 +4,7 @@
 **Used Frameworks**: .NET 6 MVC, jQuery </br>
 **Used Libraries**: DataTables, FontAwsome, Bootstrap, SweetAlert2 </br>
 
-#### Control and explore your farm livestock in your palm.
+#### Control and explore your farm livestock on your palm.
 
 ## Feature
 * Easily compare each cow's specification and quality.
